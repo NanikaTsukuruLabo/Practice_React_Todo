@@ -1,13 +1,8 @@
-import React, { useContext } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
-import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
-import Form from "./Form";
-import SendIcon from "@material-ui/icons/Send";
-import { IconButton } from "@material-ui/core";
-import { FormContext } from "../contexts/FormContext";
 
 const useStyles = makeStyles({
   root: {
@@ -29,12 +24,9 @@ const useStyles = makeStyles({
   },
 });
 
-export default function OutlinedCard() {
+export default function FormCard(props) {
   const classes = useStyles();
-  const context = useContext(FormContext);
-  console.log(context);
-  const { handleText } = context;
-
+  const { textSecondary, title, children, underButton } = props;
   return (
     <Card className={classes.root} variant="outlined">
       <CardContent>
@@ -43,18 +35,14 @@ export default function OutlinedCard() {
           color="textSecondary"
           gutterBottom
         >
-          入力フォーム
+          {textSecondary}
         </Typography>
         <Typography variant="h5" component="h2">
-          タスクを入力してください
+          {title}
         </Typography>
-        <Form />
+        {children}
       </CardContent>
-      <CardActions className={classes.buttonContainer}>
-        <IconButton>
-          <SendIcon />
-        </IconButton>
-      </CardActions>
+      {underButton || null}
     </Card>
   );
 }

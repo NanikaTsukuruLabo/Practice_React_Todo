@@ -18,10 +18,14 @@ export const FormContextProvider = (props) => {
       [name]: value,
     }));
   };
+  const clearForm = () => {
+    setState(() => initState);
+  }
 
   const provide = {
     ...state,
     handleText,
+    clearForm,
   };
 
   return (
